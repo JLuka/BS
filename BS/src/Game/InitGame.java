@@ -24,6 +24,17 @@ public class InitGame implements Serializable{
 
 	public InitGame(boolean start){
 		if(start){
+			System.out.println("Um das Spiel direkt zu starten, drücken sie bitte die (1)");
+			System.out.println("Um die Spielanleitung zu sehen drücken sie bitte die (2)");
+			int auswahl = IO.readInt();
+			while(auswahl < 1 || auswahl > 2){
+				this.colorPrint.println(EPrintColor.RED, "Sie müssen bitte eine der beiden Auswahlmöglichkeiten wählen.");
+				auswahl = IO.readInt();
+			}
+			if(auswahl == 2){
+				instructions();
+			}
+
 			this.gameOptions = new Options();
 			this.configureGame();
 			Round rounds = new Round(this.player, this.fieldSize);
@@ -240,7 +251,7 @@ public class InitGame implements Serializable{
 			}else{
 				System.out.println("Drücken sie (n) um das Spiel zu starten.");
 			}
-			
+
 
 			String eingabe = IO.readString();
 			while(!eingabe.equals("n")){
@@ -288,6 +299,60 @@ public class InitGame implements Serializable{
 
 		}
 		return null;
+	}
+
+	private void instructions(){
+		for(int i = 0; i < 10; i++){
+			System.out.println("");
+		}
+		this.colorPrint.println(EPrintColor.BLUE, "Schiffe versenken Regelwerk");
+		System.out.println("- Lars Edition -");
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE, "Spielerzahl:");
+		System.out.println("Du kannst ein Spiel mit 2-6 Spielern starten.");
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE, "Ziel des Spiels:");
+		System.out.println("Jeder versteckt eine Flotte von Schiffen vor seinen/m Gegner/n.");
+		System.out.println("Derjenige, der zuerst alle Schiffe des/der Gegner/s komplett getroffen und versenkt hat gewinnt.");
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE, "Die Flotte besteht aus folgenden Schiffen:");
+		System.out.println("");
+		System.out.println("Die Anzahl der verschiedenen Schiffe kann frei gewählt werden.");
+		System.out.println("Zerstörern \t (5 Felder lang, 3 Felder Schusslänge, 3 Runden nachladen)");
+		System.out.println("Fregatten \t (4 Felder lang, 2 Felder Schusslänge, 2 Runden nachladen)");
+		System.out.println("Korvetten \t (3 Felder lang, 1 Feld Schusslänge, 1 Runde nachladen)");
+		System.out.println("U-Botten \t (2 Felder lang, 1 Feld Schusslänge, 1 Runde nachladen)");
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE, "Das Einsetzen der Schiffe:");
+		System.out.println("");
+		System.out.println("Vor dem ersten Spielzug muss jeder Spieler seine Schiffe einsetzen.");
+		System.out.println("Die Schiffe müssen so eingesetzt werden, dass sie");
+		System.out.println("immer ein Feld Abstand zu einem anderen Schiff haben.");
+		System.out.println("Die Schiffe dürfen horizontal oder vertikal gesetzt werden.");
+		System.out.println("Die Größe des Spielfelds hängt dabei von der Anzahl der Schiffe ab.");
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE, "Auf Felder schießen:");
+		System.out.println("");
+		System.out.println("Zum schießen wählst du zuerst einen Gegner aus, den du angreifen möchtest.");
+		System.out.println("Daraufhin wählst du ein Schiff, mit dem du schießen möchtest");
+		System.out.println("und wählst dann Koordinaten auf die du schießen möchtest.");
+		System.out.println("Danach wird dir angezeigt, wie viele Schiffsteile du getroffen hast und wie viele Wassertreffer.");
+		System.out.println("Danach ist dein Schiff je nach Nachladezeit nicht verfügbar.");
+		System.out.println("Der nächste Spieler ist an der Reihe.");
+
+
+		System.out.println("");
+		this.colorPrint.println(EPrintColor.BLUE ,"Drücken sie (n) um nun das Spiel zu starten.");
+
+
+		String eingabe = IO.readString();
+		while(!eingabe.equals("n")){
+			this.colorPrint.println(EPrintColor.RED ,"Sie müssen bitte (n) drücken um das Spiel zu starten!");
+			eingabe = IO.readString();
+		}
+		for(int i = 0; i < 10; i++){
+			System.out.println("");
+		}
 	}
 
 }
