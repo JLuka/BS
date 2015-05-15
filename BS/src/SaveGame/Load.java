@@ -7,32 +7,41 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 
 import Game.Player;
+import Tools.ColoredPrint;
+import Tools.ColoredPrint.EPrintColor;
 
 public class Load {
 	
-
 	private Player[] player;
-
+	private ColoredPrint colorPrint = new ColoredPrint();
+	
 	public Load(){
 		
 	}
 	
-	public void loadGame(String name){
+	public boolean loadGame(String name){
 		ObjectInputStream input = null;
 		
 		try {
 			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
 			player = (Player[]) input.readObject();
 			input.close();
+			return true;
 
 		} catch (FileNotFoundException e) {
-			System.err.println("Datei nicht gefunden.");
-			e.printStackTrace();
+			this.colorPrint.println(EPrintColor.RED, "Datei nicht gefunden.");
+			//e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			this.colorPrint.println(EPrintColor.RED, "Datei nicht gefunden.");
+			//e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
+			this.colorPrint.println(EPrintColor.RED, "Datei nicht gefunden.");
+			//e.printStackTrace();
+		} catch (NullPointerException e){
+			this.colorPrint.println(EPrintColor.RED, "Datei nicht gefunden.");
+			//e.printStackTrace();
 		}
+		return false;
 	}
 	
 	public Player[] getPlayer() {
