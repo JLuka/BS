@@ -64,6 +64,12 @@ public class Ship implements Serializable{
 
 	public void setReloadTimeLeft(int reloadTimeLeft) {
 		this.reloadTimeLeft = reloadTimeLeft;
+		if(this.reloadTimeLeft > 0){
+			this.isReady = false;
+		}
+		else{
+			this.isReady = true;
+		}
 	}
 
 	/**
@@ -163,13 +169,15 @@ public class Ship implements Serializable{
 	 */
 
 	public void setCoordinatesIfHitted(int x, int y) {
+		System.out.println("x:" +x);
+		System.out.println("y:" +y);
 		for(int i = 0; i < this.coordinates[0].length; i++){
-			System.out.println("x:" +x);
-			System.out.println("y:" +y);
-			System.out.println("i: "+i);
-			if(this.coordinates[0][i] == x && this.coordinates[1][i] == y){
-				coordinates[0][i] = 0;
-				coordinates[1][i] = 0;
+		System.out.println("i: "+i);
+		System.out.println(this.coordinates[i][0]);
+		System.out.println(this.coordinates[i][1]);
+			if(this.coordinates[i][1] == x && this.coordinates[i][0] == y){
+				coordinates[i][0] = 0;
+				coordinates[i][1] = 0;
 				isHit++;
 				return;
 			}

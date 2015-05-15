@@ -25,7 +25,7 @@ public class InitGame implements Serializable{
 	public InitGame(boolean start){
 		if(start){
 			System.out.println("Um das Spiel direkt zu starten, drücken sie bitte die (1)");
-			System.out.println("Um die Spielanleitung zu sehen drücken sie bitte die (2)");
+			System.out.println("Um die Spielanleitung zu sehen, drücken sie bitte die (2)");
 			int auswahl = IO.readInt();
 			while(auswahl < 1 || auswahl > 2){
 				this.colorPrint.println(EPrintColor.RED, "Sie müssen bitte eine der beiden Auswahlmöglichkeiten wählen.");
@@ -122,6 +122,11 @@ public class InitGame implements Serializable{
 						IO.println("Horizontal h \nVertikal v");
 						char orientation = IO.readChar();
 
+						while(orientation != 'h' && orientation != 'v'){
+							this.colorPrint.println(EPrintColor.RED,"Fehler! Bitte h oder v eingeben!");
+							orientation = IO.readChar();
+						}
+						
 						if(orientation == 'h'){
 							this.player[i].saveShipCoordinatesH(koordinaten[0], koordinaten[1], 5, d);
 						}
@@ -158,6 +163,10 @@ public class InitGame implements Serializable{
 						IO.println("Horizontal h \nVertikal v");
 						char orientation = IO.readChar();
 
+						while(orientation != 'h' && orientation != 'v'){
+							this.colorPrint.println(EPrintColor.RED,"Fehler! Bitte h oder v eingeben!");
+							orientation = IO.readChar();
+						}
 						if(orientation == 'h'){
 							this.player[i].saveShipCoordinatesH(koordinaten[0], koordinaten[1], 4, f);
 						}
@@ -193,7 +202,12 @@ public class InitGame implements Serializable{
 					else{
 						IO.println("Horizontal h \nVertikal v");
 						char orientation = IO.readChar();
-
+						
+						while(orientation != 'h' && orientation != 'v'){
+							this.colorPrint.println(EPrintColor.RED,"Fehler! Bitte h oder v eingeben!");
+							orientation = IO.readChar();
+						}
+						
 						if(orientation == 'h'){
 							this.player[i].saveShipCoordinatesH(koordinaten[0], koordinaten[1], 3, k);
 						}
@@ -230,6 +244,10 @@ public class InitGame implements Serializable{
 						IO.println("Horizontal h \nVertikal v");
 						char orientation = IO.readChar();
 
+						while(orientation != 'h' && orientation != 'v'){
+							this.colorPrint.println(EPrintColor.RED,"Fehler! Bitte h oder v eingeben!");
+							orientation = IO.readChar();
+						}
 						if(orientation == 'h'){
 							this.player[i].saveShipCoordinatesH(koordinaten[0], koordinaten[1], 2, s);
 						}
@@ -295,8 +313,6 @@ public class InitGame implements Serializable{
 			return iKoordinaten;
 		}
 		catch(Exception e){
-			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
-
 		}
 		return null;
 	}

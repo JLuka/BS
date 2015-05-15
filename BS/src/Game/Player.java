@@ -505,8 +505,8 @@ public class Player implements Serializable{
 				return true;
 			}
 		}
-		for(int i = 0; i < destroyer.length; i++){
-			if(corvette[i].isReady()){
+		for(int i = 0; i < submarine.length; i++){
+			if(submarine[i].isReady()){
 				return true;
 			}
 		}
