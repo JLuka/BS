@@ -39,7 +39,7 @@ public class Round{
 		char orientation;
 		String eingabe;
 		int gegner = 0;
-		int schiff;
+		int schiff = 0;
 		int counter = 1;
 
 		while(ende() > 1){
@@ -104,10 +104,24 @@ public class Round{
 								}
 							}
 
-							schiff = IO.readShipInt();
-							while(schiff < 1 || schiff > 4){
-								this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte wählen sie ein Schiff aus!");
+							
+							boolean go = false;
+							while(!go){
 								schiff = IO.readShipInt();
+								
+								if(schiff == 1){
+									go = player[i].checkIfShipIsReady("D");
+								} else if(schiff == 2){
+									go = player[i].checkIfShipIsReady("F");
+								} else if(schiff == 3){
+									go = player[i].checkIfShipIsReady("C");
+								} else if(schiff == 4){
+									go = player[i].checkIfShipIsReady("S");
+								}
+								
+								if(!go){
+									this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte wählen sie ein Schiff aus!");
+								}
 
 							}
 
