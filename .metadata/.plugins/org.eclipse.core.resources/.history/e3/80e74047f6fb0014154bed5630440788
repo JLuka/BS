@@ -180,7 +180,7 @@ public class Round{
 							//Überprüft, ob der Gegner noch am Leben ist, wenn nicht wird isAlive auf false gesetzt.
 
 							if(player[gegner-1].getIsAlive() == false){
-								this.colorPrint.println(EPrintColor.PURPLE,"Herzlichen Glückwunsch, sie haben " + player[gegner-1].getPlayerName() + " besiegt.");
+								System.out.println("Herzlichen Glückwunsch, sie haben " + player[gegner-1].getPlayerName() + " besiegt.");
 							}
 
 

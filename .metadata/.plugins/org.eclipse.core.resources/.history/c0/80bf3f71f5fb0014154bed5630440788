@@ -180,7 +180,7 @@ public class Round{
 							//Überprüft, ob der Gegner noch am Leben ist, wenn nicht wird isAlive auf false gesetzt.
 
 							if(player[gegner-1].getIsAlive() == false){
-								this.colorPrint.println(EPrintColor.PURPLE,"Herzlichen Glückwunsch, sie haben " + player[gegner-1].getPlayerName() + " besiegt.");
+								System.out.println("Herzlichen Glückwunsch, sie haben " + player[gegner-1].getPlayerName() + " besiegt.");
 							}
 
 
@@ -266,20 +266,14 @@ public class Round{
 
 						}
 					}
-					else{
-						player[i].setActive(false);
-						if(i == player.length-1){
-							player[0].setActive(true);
-						}else{
-							player[i+1].setActive(true);
-						}
-					}
 				}
 			}
-			//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
-			for(int j = 0; j < player.length; j++){
-				player[j].reloadTimeCountdown();
-			}
+
+		}
+
+		//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
+		for(int j = 0; j < player.length; j++){
+			player[j].reloadTimeCountdown();
 		}
 
 	}
