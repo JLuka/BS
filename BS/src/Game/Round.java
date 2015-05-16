@@ -136,6 +136,7 @@ public class Round{
 
 							while(koordinaten == null){
 								System.out.println("Bitte geben sie die X,Y Koordinaten ein, auf die sie schießen möchten.");
+								pos = IO.readString();
 								koordinaten = checkPos(pos);
 							}
 
