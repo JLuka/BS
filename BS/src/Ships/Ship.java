@@ -174,7 +174,6 @@ public class Ship implements Serializable{
 				coordinates[0][i] = 0;
 				coordinates[1][i] = 0;
 				isHit++;
-				System.out.println("isHITT");
 				return;
 			}
 		}

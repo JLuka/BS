@@ -39,7 +39,7 @@ public class Round{
 		char orientation;
 		String eingabe;
 		int gegner = 0;
-		int schiff;
+		int schiff = 0;
 		int counter = 1;
 
 		while(ende() > 1){
@@ -70,12 +70,12 @@ public class Round{
 							System.out.println("Geben sie nun die Zahl ihres Wunschgegners ein.");
 
 							gegner = IO.readEnemyInt();
-				
+
 							while( (gegner < 0) || ( (gegner-1) == i) || (gegner > player.length)){
 								this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte Zahl ihres Wunschgegners auswählen!");
 								gegner = IO.readEnemyInt();
 							}
-							
+
 							//Schiff zum angreifen wählen
 							System.out.println("Sie spielen nun gegen "+ player[gegner-1].getPlayerName());
 
@@ -104,10 +104,24 @@ public class Round{
 								}
 							}
 
-							schiff = IO.readShipInt();
-							while(schiff < 1 || schiff > 4){
-								this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte wählen sie ein Schiff aus!");
+
+							boolean go = false;
+							while(!go){
 								schiff = IO.readShipInt();
+
+								if(schiff == 1){
+									go = player[i].checkIfShipIsReady("D");
+								} else if(schiff == 2){
+									go = player[i].checkIfShipIsReady("F");
+								} else if(schiff == 3){
+									go = player[i].checkIfShipIsReady("C");
+								} else if(schiff == 4){
+									go = player[i].checkIfShipIsReady("S");
+								}
+
+								if(!go){
+									this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe! Bitte wählen sie ein Schiff aus!");
+								}
 
 							}
 
@@ -122,6 +136,7 @@ public class Round{
 
 							while(koordinaten == null){
 								System.out.println("Bitte geben sie die X,Y Koordinaten ein, auf die sie schießen möchten.");
+								pos = IO.readString();
 								koordinaten = checkPos(pos);
 							}
 
@@ -211,7 +226,9 @@ public class Round{
 								}
 							}
 						}else{
-							colorPrint.println(EPrintColor.BLUE, "Spieler " + player[i].getPlayerName() + " hat keine geladenen Schiffe zur verfügung!");
+							colorPrint.println(EPrintColor.BLUE, "Spieler " + player[i].getPlayerName() + " hat keine geladenen Schiffe zur verfügung! "
+									+ "Sie müssen diese Runde leider aussetzen.");
+							System.out.println("");
 
 							player[i].setActive(false);
 							if(i == player.length-1){
@@ -219,65 +236,94 @@ public class Round{
 							}else{
 								player[i+1].setActive(true);
 							}
+
+							System.out.println("Drücken sie (n) damit der nächste Spieler an der Reihe ist.");
+							System.out.println("Drücken sie (x) um das Spiel zu beenden ohne zu speichern.");
+							System.out.println("Drücken sie (s) um das Spiel zu speichern.");
+
+							eingabe = IO.readString();
+
+							while((!(eingabe.equals("n"))) && (!(eingabe.equals("x"))) &&  (!(eingabe.equals("s")))){
+								System.out.println("Sie müssen eine dieser Auswahlmöglichkeiten wählen.");
+								eingabe = IO.readString();
+							}
+							if(eingabe.equals("n")){
+								for(int q = 0; q < 150; q++){
+									System.out.println("");
+								}
+							}else if(eingabe.equals("x")){
+								System.exit(0);
+							}else if(eingabe.equals("s")){
+								System.out.println("Bitte geben sie ihrem Spiel einen Namen unter dem sie es abspeichern möchten.");
+								eingabe = IO.readString();
+								save.saveGame(eingabe, player);
+								System.out.println("Wenn sie das Spiel jetzt beenden möchten, drücken sie (x) um weiter zu spielen drücken sie eine andere Taste.");
+								eingabe = IO.readString();
+								if(eingabe.equals("x")){
+									System.exit(0);
+								}
+							}
+
 						}
 					}
-
 				}
 			}
 
-			//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
-			for(int j = 0; j < player.length; j++){
-				player[j].reloadTimeCountdown();
-			}
-
 		}
+
+		//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
+		for(int j = 0; j < player.length; j++){
+			player[j].reloadTimeCountdown();
+		}
+
 	}
+}
 
 
 
-	/**
-	 * @param pos - die zu überprüfenden Koordinaten 
-	 * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
-	 */
-	private int[] checkPos(String pos){
-		try{
-			pos = pos.replaceAll("\\s+", "");
+/**
+ * @param pos - die zu überprüfenden Koordinaten 
+ * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
+ */
+private int[] checkPos(String pos){
+	try{
+		pos = pos.replaceAll("\\s+", "");
 
-			String[] sKoordinaten = pos.split(",");
-			int[] iKoordinaten = new int[2];
+		String[] sKoordinaten = pos.split(",");
+		int[] iKoordinaten = new int[2];
 
-			if(sKoordinaten.length != 2){
+		if(sKoordinaten.length != 2){
+			return null;
+		}
+		for(int i = 0; i < 2; i++){
+			int toInt = Integer.parseInt(sKoordinaten[i]);
+			if(toInt < 0 || toInt > fieldSize){
 				return null;
 			}
-			for(int i = 0; i < 2; i++){
-				int toInt = Integer.parseInt(sKoordinaten[i]);
-				if(toInt < 0 || toInt > fieldSize){
-					return null;
-				}
-				else{
-					iKoordinaten[i] = toInt;
-				}
-			}
-
-			return iKoordinaten;
-		}
-		catch(Exception e){
-			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
-
-		}
-		return null;
-	}
-
-
-	public int ende(){
-		int counter = 0;
-		for(int i = 0; i<player.length; i++){
-			if(player[i].getIsAlive()){
-				counter++;
+			else{
+				iKoordinaten[i] = toInt;
 			}
 		}
-		return counter;
+
+		return iKoordinaten;
 	}
+	catch(Exception e){
+		this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
+
+	}
+	return null;
+}
+
+
+public int ende(){
+	int counter = 0;
+	for(int i = 0; i<player.length; i++){
+		if(player[i].getIsAlive()){
+			counter++;
+		}
+	}
+	return counter;
+}
 
 
 

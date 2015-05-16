@@ -490,26 +490,38 @@ public class Player implements Serializable{
 	}
 	
 	public boolean checkIfShipIsReady(String shipSymbol){
-		for(int i = 0; i < destroyer.length; i++){
-			if(destroyer[i].isReady()){
-				return true;
+		
+		switch(shipSymbol){
+		case "D":
+			for(int i = 0; i < destroyer.length; i++){
+				if(destroyer[i].isReady()){
+					return true;
+				}
 			}
-		}
-		for(int i = 0; i < frigate.length; i++){
-			if(frigate[i].isReady()){
-				return true;
+			break;
+		case "F":
+			for(int i = 0; i < frigate.length; i++){
+				if(frigate[i].isReady()){
+					return true;
+				}
 			}
-		}
-		for(int i = 0; i < corvette.length; i++){
-			if(corvette[i].isReady()){
-				return true;
+			break;
+		case "C":
+			for(int i = 0; i < corvette.length; i++){
+				if(corvette[i].isReady()){
+					return true;
+				}
 			}
-		}
-		for(int i = 0; i < submarine.length; i++){
-			if(submarine[i].isReady()){
-				return true;
+			break;
+		case "S":
+			for(int i = 0; i < submarine.length; i++){
+				if(submarine[i].isReady()){
+					return true;
+				}
 			}
+			break;
 		}
+		
 		return false;
 	}
 

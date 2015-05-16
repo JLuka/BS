@@ -1,4 +1,4 @@
-package KI;
+package AI;
 
 public class ArtificialIntelligence {
 
