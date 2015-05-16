@@ -263,67 +263,67 @@ public class Round{
 									System.exit(0);
 								}
 							}
-
+						else{
+							System.out.println("Spieler " + player[i].getPlayerName() + " ist schon besiegt.");
 						}
 					}
+
 				}
 			}
 
-		}
+			//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
+			for(int j = 0; j < player.length; j++){
+				player[j].reloadTimeCountdown();
+			}
 
-		//Bei allen Schiffen die laden, wird die reloadTime um einen verringert. Ist diese = 0 sind sie wieder verfügbar.
-		for(int j = 0; j < player.length; j++){
-			player[j].reloadTimeCountdown();
 		}
-
 	}
-}
 
 
 
-/**
- * @param pos - die zu überprüfenden Koordinaten 
- * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
- */
-private int[] checkPos(String pos){
-	try{
-		pos = pos.replaceAll("\\s+", "");
+	/**
+	 * @param pos - die zu überprüfenden Koordinaten 
+	 * @return Gibt zurück, ob die eingegebenen Koordinaten korrekt sind
+	 */
+	private int[] checkPos(String pos){
+		try{
+			pos = pos.replaceAll("\\s+", "");
 
-		String[] sKoordinaten = pos.split(",");
-		int[] iKoordinaten = new int[2];
+			String[] sKoordinaten = pos.split(",");
+			int[] iKoordinaten = new int[2];
 
-		if(sKoordinaten.length != 2){
-			return null;
-		}
-		for(int i = 0; i < 2; i++){
-			int toInt = Integer.parseInt(sKoordinaten[i]);
-			if(toInt < 0 || toInt > fieldSize){
+			if(sKoordinaten.length != 2){
 				return null;
 			}
-			else{
-				iKoordinaten[i] = toInt;
+			for(int i = 0; i < 2; i++){
+				int toInt = Integer.parseInt(sKoordinaten[i]);
+				if(toInt < 0 || toInt > fieldSize){
+					return null;
+				}
+				else{
+					iKoordinaten[i] = toInt;
+				}
+			}
+
+			return iKoordinaten;
+		}
+		catch(Exception e){
+			this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
+
+		}
+		return null;
+	}
+
+
+	public int ende(){
+		int counter = 0;
+		for(int i = 0; i<player.length; i++){
+			if(player[i].getIsAlive()){
+				counter++;
 			}
 		}
-
-		return iKoordinaten;
+		return counter;
 	}
-	catch(Exception e){
-		this.colorPrint.println(EPrintColor.RED, "Ungültige Eingabe");
-
-	}
-	return null;
-}
-
-
-public int ende(){
-	int counter = 0;
-	for(int i = 0; i<player.length; i++){
-		if(player[i].getIsAlive()){
-			counter++;
-		}
-	}
-	return counter;
-}
 
 
 
