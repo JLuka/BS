@@ -106,9 +106,6 @@ public class Ship implements Serializable{
 
 	public void setReloadTime(int reloadTime) {
 		this.reloadTime = reloadTime;
-		if(this.reloadTime == 0){
-			this.setReady(true);
-		}
 	}
 
 	/**

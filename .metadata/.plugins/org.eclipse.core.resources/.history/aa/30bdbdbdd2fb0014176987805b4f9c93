@@ -1,8 +1,6 @@
 package Game;
 import java.io.Serializable;
 
-import Tools.ColoredPrint;
-import Tools.ColoredPrint.EPrintColor;
 import Tools.IO;
 
 
@@ -19,13 +17,10 @@ public class Options implements Serializable{
 	private int submarine;
 	private int totalShips;
 	private int battlefieldSize;
-	private ColoredPrint coloredPrint;
 
 	public Options(){
 		this.totalShips = 0;
-		this.coloredPrint = new ColoredPrint();
 		this.initGame();
-
 	}
 
 	public int getPlayer() {
@@ -116,37 +111,14 @@ public class Options implements Serializable{
 		System.out.println("Bitte geben sie nun die Anzahl der Schiffe ein:");
 		while(totalShips == 0){
 			System.out.println("Zerstörer");
-			
-			destroyer = IO.readShipInt();
-			while(destroyer < 0){
-				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der Zerstörer?");
-				destroyer = IO.readShipInt();
-			}
-			
+			destroyer = IO.readInt();
 			System.out.println("Frigatte");
-			
-			frigate = IO.readShipInt();
-			while(frigate < 0){
-				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der Fregatten?");
-				frigate = IO.readShipInt();
-			}
-			
+			frigate = IO.readInt();
 			System.out.println("Korvette");
-			corvette = IO.readShipInt();
-			
-			while(corvette < 0){
-				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der Korvetten?");
-				corvette = IO.readShipInt();
-			}
-			
+			corvette = IO.readInt();
 			System.out.println("U-Boot");
-			submarine = IO.readShipInt();
+			submarine = IO.readInt();
 			totalShips = destroyer + corvette + frigate + submarine;
-			
-			while(submarine < 0){
-				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der UBoote?");
-				submarine = IO.readShipInt();
-			}
 			if(totalShips == 0){
 				System.out.println("Sie müssen mindestens ein Schiff auswählen!");
 			}
