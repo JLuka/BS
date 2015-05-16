@@ -1,5 +1,6 @@
 package Game;
 
+import java.io.File;
 import java.io.Serializable;
 
 import SaveGame.Load;
@@ -20,6 +21,7 @@ public class InitGame implements Serializable{
 	private Player[] player;
 	private ColoredPrint colorPrint = new ColoredPrint();
 	private int fieldSize;
+	String[] listFileNames;
 
 
 	public InitGame(boolean start){
@@ -42,10 +44,53 @@ public class InitGame implements Serializable{
 		}else{
 			boolean go = false;
 			while(!go){
-				System.out.println("Bitte geben sie den Namen von ihrem Spiel ein, welches sie laden möchten.");
-				String eingabe = IO.readString();
+				System.out.println("Bitte geben sie die Zahl von ihrem Spiel ein, welches sie laden möchten.");
 				
-				if(load.loadGame(eingabe)){
+				File f = new File(System.getProperty("user.dir"));
+				File[] l = f.listFiles(); 
+				
+				listFileNames = new String[0];
+				
+				for (int x = 0; x < l.length; x++) 
+				{
+					try{
+						
+						String fileName = l[x].getName();
+						String[] fileArray = fileName.split("\\.");
+						
+						if(fileArray[1].equals("save")){
+							
+							String[] newArray = new String[listFileNames.length + 1];
+							
+							for(int i = 0; i < listFileNames.length; i++){
+								newArray[i] = listFileNames[i];
+							}
+							
+							newArray[newArray.length-1] = fileArray[0];
+							
+							listFileNames = newArray;
+							
+							System.out.println("("+ newArray.length +") " + fileArray[0]);
+						}
+					} catch (ArrayIndexOutOfBoundsException e){
+						e.getStackTrace();
+					}
+				}
+				
+				if(listFileNames.length == 0){
+					this.colorPrint.println(EPrintColor.RED, "Keine Datei zum laden gefunden.");
+					System.exit(0);
+				}
+				
+				int eingabe = IO.readInt();
+				
+				while(eingabe < 1 || eingabe > listFileNames.length){
+					this.colorPrint.println(EPrintColor.RED, "Falsche Eingabe");
+					System.out.println("Bitte geben sie die Zahl von ihrem Spiel ein, welches sie laden möchten.");
+					eingabe = IO.readInt();
+				}
+				
+				if(load.loadGame(listFileNames[eingabe-1])){
 					go = true;
 				}
 			}

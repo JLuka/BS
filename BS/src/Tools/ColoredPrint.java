@@ -1,5 +1,8 @@
 package Tools;
-public class ColoredPrint {
+
+import java.io.Serializable;
+
+public class ColoredPrint implements Serializable{
 
 	public enum EPrintColor{
 		BLACK,
@@ -12,6 +15,8 @@ public class ColoredPrint {
 		WHITE,
 	}
 
+	private static final long serialVersionUID = 7380755092350433487L;
+	
 	private final String ANSI_RESET = (char)27+"[0m";
 	private final String ANSI_BLACK = (char)27+"[90m";
 	private final String ANSI_RED = (char)27+"[91m";

@@ -10,14 +10,12 @@ import Game.Player;
 
 public class Save {
 
-
-	
 	public void saveGame(String fileName, Player[] player){
 		ObjectOutputStream output = null;
 		
 		try {
 			output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName + ".save")));
-				output.writeObject(player);
+			output.writeObject(player);
 			output.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
