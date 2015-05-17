@@ -46,7 +46,7 @@ public class InitGame implements Serializable{
 			while(!go){
 				System.out.println("Bitte geben sie die Zahl von ihrem Spiel ein, welches sie laden möchten.");
 				
-				File f = new File(System.getProperty("user.dir"));
+				File f = new File(System.getProperty("user.dir") + "/data");
 				File[] l = f.listFiles(); 
 				
 				listFileNames = new String[0];

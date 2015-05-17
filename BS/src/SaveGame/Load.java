@@ -23,7 +23,7 @@ public class Load {
 		ObjectInputStream input = null;
 		
 		try {
-			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream(name + ".save")));
+			input = new ObjectInputStream(new BufferedInputStream(new FileInputStream("./data/" + name + ".save")));
 			player = (Player[]) input.readObject();
 			input.close();
 			return true;
