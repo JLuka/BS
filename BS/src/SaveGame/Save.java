@@ -1,6 +1,7 @@
 package SaveGame;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,8 +14,13 @@ public class Save {
 	public void saveGame(String fileName, Player[] player){
 		ObjectOutputStream output = null;
 		
+		
+		
 		try {
-			output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(fileName + ".save")));
+			File dir = new File(System.getProperty("user.dir") + "/data"); 
+			dir.mkdir();
+			
+			output = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("./data/" + fileName + ".save")));
 			output.writeObject(player);
 			output.close();
 		} catch (FileNotFoundException e) {
