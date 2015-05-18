@@ -365,8 +365,8 @@ public class Player implements Serializable{
 	public void saveShipCoordinatesH(int x, int y, int length, int shipNumber){
 		int[][] coordinates = new int[2][length];
 		for(int i = 0; i < length; i++){
-			coordinates[0][i] = x+i;
-			coordinates[1][i] = y;
+			coordinates[0][i] = x;
+			coordinates[1][i] = y+i;
 		}
 		if(length == 5){
 			destroyer[shipNumber].setCoordinates(coordinates);
@@ -391,8 +391,8 @@ public class Player implements Serializable{
 	public void saveShipCoordinatesV(int x, int y, int length, int shipNumber){
 		int[][] coordinates = new int[2][length];
 		for(int i = 0; i < length; i++){
-			coordinates[0][i] = y+1;
-			coordinates[1][i] = x;
+			coordinates[0][i] = y;
+			coordinates[1][i] = x+i;
 		}
 		if(length == 5){
 			destroyer[shipNumber].setCoordinates(coordinates);

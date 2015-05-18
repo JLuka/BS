@@ -154,7 +154,7 @@ public class Round{
 
 								player[gegner-1].getPrivateField().setAttack(EShipType.DESTROYER, koordinaten,orientation, player[gegner-1]);
 								player[i].setDestroyerIsntReady();
-								//player[gegner-1].checkIfSunk("D");
+								player[gegner-1].checkIfSunk("D");
 							} else if(schiff == 2){
 								System.out.println("Horizontal (h) oder Vertikal(v)?");
 								orientation = IO.readChar();
@@ -165,17 +165,17 @@ public class Round{
 								}
 
 								player[gegner-1].getPrivateField().setAttack(EShipType.FRIGATE,koordinaten,orientation,player[gegner-1]);
-								//player[gegner-1].checkIfSunk("F");
+								player[gegner-1].checkIfSunk("F");
 								player[i].setFrigateIsntReady();
 							} else if(schiff == 3){
 								orientation = 'h';
 								player[gegner-1].getPrivateField().setAttack(EShipType.CORVETTE,koordinaten,orientation,player[gegner-1]);
-								//player[gegner-1].checkIfSunk("C");
+								player[gegner-1].checkIfSunk("C");
 								player[i].setCorvetteIsntReady();
 							} else if(schiff == 4){
 								orientation = 'h';
 								player[gegner-1].getPrivateField().setAttack(EShipType.SUBMARINE,koordinaten,orientation,player[gegner-1]);
-								//player[gegner-1].checkIfSunk("S");
+								player[gegner-1].checkIfSunk("S");
 								player[i].setSubmarineIsntReady();
 							}
 

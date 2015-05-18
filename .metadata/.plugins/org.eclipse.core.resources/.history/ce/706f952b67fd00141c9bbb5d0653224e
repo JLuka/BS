@@ -174,22 +174,19 @@ public class Ship implements Serializable{
 	public void setCoordinatesIfHitted(int x, int y) {
 		for(int i = 0; i < this.coordinates[0].length; i++){
 			//TESTAUSGABE! 
-
-//			 System.out.println("i: " + i);
-//			 System.out.println("length[0]:" + this.coordinates[0].length);
-//			 System.out.println("this.coordinates[1][i] ==  y: " + this.coordinates[1][i] +" == " + y);
-//			 System.out.println("this.coordinates[0][i] == x: " + this.coordinates[0][i] + " ==" + x);
-//			 
-			if(this.coordinates[1][i] == y && this.coordinates[0][i] == x){
+//			 for(int j = 0; j < this.coordinates[0].length; j++){
+//				System.out.println(coordinates[0][j]);
+//			}
+			 System.out.println("i: " + i);
+			 System.out.println("length[0]:" + this.coordinates[0].length);
+			 System.out.println("this.coordinates[1][i] ==  x: " + this.coordinates[1][i] +" == " + x);
+			 System.out.println("this.coordinates[0][i] == y: " + this.coordinates[0][i] + " ==" + y);
 			
-//				System.out.println(coordinates[0][i]);
-//				System.out.println(coordinates[1][i]);
+			 
+			 
+			if(this.coordinates[1][i] == x && this.coordinates[0][i] == y){
 				coordinates[0][i] = 0;
 				coordinates[1][i] = 0;
-				
-//				System.out.println(coordinates[0][i]);
-//				System.out.println(coordinates[1][i]);
-				
 				isHit++;
 				return;
 			}

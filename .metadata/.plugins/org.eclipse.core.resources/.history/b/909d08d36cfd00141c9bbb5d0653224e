@@ -131,7 +131,7 @@ public class MatrixTools implements Serializable{
 	 * @return Gibt das mit dem ausgewähltem Schiff positionierte Spielfeld zurück 
 	 */
 	public int[][] addMatrix(int xVal, int yVal, char orientation, int[][]matrix, EShipType ship ){	
-
+	
 		int shipSymbol = 0;
 		int length = 0;
 
@@ -342,7 +342,7 @@ public class MatrixTools implements Serializable{
 
 		int x = coordinates[0];
 		int y = coordinates[1];
-
+		
 		int hitWater = 0;
 		int hitShip = 0;
 
@@ -352,7 +352,7 @@ public class MatrixTools implements Serializable{
 			 * die Koordinaten prüfen und setzen
 			 */
 			for(int z = x; z < x+shootLength; z++){
-
+		
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldbreite
 				 */
@@ -376,7 +376,7 @@ public class MatrixTools implements Serializable{
 					 * öffentliches Feld:
 					 * 2 egal um welches Schiff es sich handelt		
 					 */
-
+					
 					else if(privateField[y][z] == 1){
 						publicField[y][z] = 2;
 
@@ -385,7 +385,6 @@ public class MatrixTools implements Serializable{
 						}
 						hitShip++;
 
-						player.checkIfSunk("D");
 					}
 					else if(privateField[y][z] == 2){
 						publicField[y][z] = 2;
@@ -394,7 +393,6 @@ public class MatrixTools implements Serializable{
 							player.getFrigate()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
-						player.checkIfSunk("F");
 					}
 					else if(privateField[y][z] == 3){
 						publicField[y][z] = 2;
@@ -403,7 +401,6 @@ public class MatrixTools implements Serializable{
 							player.getCorvette()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
-						player.checkIfSunk("C");
 					}
 					else if(privateField[y][z] == 4){
 						publicField[y][z] = 2;
@@ -412,7 +409,6 @@ public class MatrixTools implements Serializable{
 							player.getSubmarine()[i].setCoordinatesIfHitted(z, y);
 						}
 						hitShip++;
-						player.checkIfSunk("S");
 					}
 				}
 			}
@@ -420,12 +416,12 @@ public class MatrixTools implements Serializable{
 		else{
 
 			for(int q = y; q < y+shootLength; q++){
-
+				
 				/*Nur wenn die gewählte Koordinaten Position
 				 * kleiner ist als die Spielfeldlänge
 				 */
 				if(q < privateField.length){
-
+					
 					/*Wenn an dieser Position auf dem Spielfeld des Spielers
 					 * eine 0 = Wasser ist, so setze auf dem öffentlichen Feld 
 					 * eine 1 für getroffenes Wasser (wird dann als X ausgedruckt)
@@ -445,43 +441,38 @@ public class MatrixTools implements Serializable{
 					 * öffentliches Feld:
 					 * 2 egal um welches Schiff es sich handelt		
 					 */else if(privateField[q][x] == 1){
-						 publicField[q][x] = 2;
+						publicField[q][x] = 2;
 
-						 for(int i = 0; i < player.getDestroyer().length; i++){
-							 player.getDestroyer()[i].setCoordinatesIfHitted(q, x);
-						 }
+						for(int i = 0; i < player.getDestroyer().length; i++){
+							player.getDestroyer()[i].setCoordinatesIfHitted(q, x);
+						}
 
-						 hitShip++;
-						 player.checkIfSunk("D");
-					 }
-					 else if(privateField[y][x] == 2){
-						 publicField[q][x] = 2;
+						hitShip++;
+					}
+					else if(privateField[y][x] == 2){
+						publicField[q][x] = 2;
 
-						 for(int i = 0; i < player.getFrigate().length; i++){
-							 player.getFrigate()[i].setCoordinatesIfHitted(q, x);
-						 }
-						 hitShip++;
-						 player.checkIfSunk("F");
-					 }
-					 else if(privateField[q][x] == 3){
-						 publicField[q][x] = 2;
+						for(int i = 0; i < player.getFrigate().length; i++){
+							player.getFrigate()[i].setCoordinatesIfHitted(q, x);
+						}
+						hitShip++;
+					}
+					else if(privateField[q][x] == 3){
+						publicField[q][x] = 2;
 
-						 for(int i = 0; i < player.getCorvette().length; i++){
-							 player.getCorvette()[i].setCoordinatesIfHitted(q, x);
-						 }
-						 hitShip++;
-						 player.checkIfSunk("C");
+						for(int i = 0; i < player.getCorvette().length; i++){
+							player.getCorvette()[i].setCoordinatesIfHitted(q, x);
+						}
+						hitShip++;
+					}
+					else if(privateField[q][x] == 4){
+						publicField[q][x] = 2;
 
-					 }
-					 else if(privateField[q][x] == 4){
-						 publicField[q][x] = 2;
-
-						 for(int i = 0; i < player.getSubmarine().length; i++){
-							 player.getSubmarine()[i].setCoordinatesIfHitted(q, x);
-						 }
-						 hitShip++;
-						 player.checkIfSunk("S");
-					 }
+						for(int i = 0; i < player.getSubmarine().length; i++){
+							player.getSubmarine()[i].setCoordinatesIfHitted(q, x);
+						}
+						hitShip++;
+					}
 
 				}
 			}
@@ -495,7 +486,7 @@ public class MatrixTools implements Serializable{
 	public void printPublicField(int[][] publicField, String name){
 
 		int[][] printMatrix = new int[publicField.length][publicField.length];
-
+		
 		System.out.println("Spielfeld von \"" + name + "\"");
 
 		for(int y = 0; y < printMatrix.length; y++){
