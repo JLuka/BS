@@ -40,6 +40,7 @@ public class InitGame implements Serializable{
 			this.gameOptions = new Options();
 			this.configureGame();
 			Round rounds = new Round(this.player, this.fieldSize);
+			rounds.play();
 		}else{
 			boolean go = false;
 			while(!go){
@@ -323,7 +324,7 @@ public class InitGame implements Serializable{
 
 			String eingabe = IO.readString();
 			while(!eingabe.equals("n")){
-				System.out.println("Sie müssen bitte (n) drücken, damit der nächste Spieler an der Reihe ist.");
+				System.out.println("Sie müssen bitte (n) drücken, damit der nächste Spieler spielen kann.");
 				eingabe = IO.readString();
 			}
 			if(eingabe.equals("n")){

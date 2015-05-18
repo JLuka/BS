@@ -40,6 +40,7 @@ public class InitGame implements Serializable{
 			this.gameOptions = new Options();
 			this.configureGame();
 			Round rounds = new Round(this.player, this.fieldSize);
+			rounds.play();
 		}else{
 			boolean go = false;
 			while(!go){

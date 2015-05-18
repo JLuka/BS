@@ -132,14 +132,12 @@ public class Options implements Serializable{
 			
 			System.out.println("U-Boot");
 			submarine = IO.readShipInt();
+			totalShips = destroyer + corvette + frigate + submarine;
 			
 			while(submarine < 0){
 				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der UBoote?");
 				submarine = IO.readShipInt();
 			}
-			
-			totalShips = destroyer + corvette + frigate + submarine;
-			
 			if(totalShips == 0){
 				System.out.println("Sie müssen mindestens ein Schiff auswählen!");
 			}

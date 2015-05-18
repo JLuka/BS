@@ -60,6 +60,15 @@ public class Options implements Serializable{
 		return battlefieldSize;
 	}
 
+	/**
+	 * Spielstart ruft die Optionen für Spieler, Spielfeld und Schiffe auf
+	 */
+	public void initGame(){
+
+		initPlayer();
+		initShips();
+		setBattleFieldSize();
+	}
 
 	/**
 	 * Einstellungen der Spieleranzahl und ihre Namen
@@ -132,14 +141,12 @@ public class Options implements Serializable{
 			
 			System.out.println("U-Boot");
 			submarine = IO.readShipInt();
+			totalShips = destroyer + corvette + frigate + submarine;
 			
 			while(submarine < 0){
 				this.coloredPrint.println(EPrintColor.RED, "Ungültige Eingabe! Anzahl der UBoote?");
 				submarine = IO.readShipInt();
 			}
-			
-			totalShips = destroyer + corvette + frigate + submarine;
-			
 			if(totalShips == 0){
 				System.out.println("Sie müssen mindestens ein Schiff auswählen!");
 			}
@@ -172,15 +179,5 @@ public class Options implements Serializable{
 			System.out.println("Ihre Eingabe muss midestens " + zahl + " betragen. Bitte wiederholen sie ihre Eingabe!");
 			this.battlefieldSize = IO.readInt();
 		}
-	}
-	
-	/**
-	 * Spielstart ruft die Optionen für Spieler, Spielfeld und Schiffe auf
-	 */
-	public void initGame(){
-
-		initPlayer();
-		initShips();
-		setBattleFieldSize();
 	}
 }

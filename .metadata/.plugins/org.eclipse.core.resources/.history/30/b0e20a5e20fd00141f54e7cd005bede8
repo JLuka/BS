@@ -139,7 +139,6 @@ public class Options implements Serializable{
 			}
 			
 			totalShips = destroyer + corvette + frigate + submarine;
-			
 			if(totalShips == 0){
 				System.out.println("Sie müssen mindestens ein Schiff auswählen!");
 			}
